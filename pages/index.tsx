@@ -1,8 +1,10 @@
 import { FC } from "react";
 
+import { Grid } from "@nextui-org/react";
+import { PokemonListResponse, SmallPokemon } from "@/interfaces";
 import { pokeApi } from "@/api";
 import { LayoutApp } from "@/components/layouts";
-import { PokemonListResponse, SmallPokemon } from "@/interfaces";
+import { PokemonCard } from "@/components/pokemon";
 
 interface Props{
   pokemons: SmallPokemon[]
@@ -14,13 +16,13 @@ const Home: FC<Props> = ({pokemons})=> {
   return (
     <LayoutApp title="Listado de Pokemones">
       <ul>
+        <Grid.Container gap={2} justify="flex-start">
         {
-          pokemons.map(({id, name})=>(
-            <li key={id}>
-              #{id} - {name}
-            </li>
+          pokemons.map((pokemon)=>(
+            <PokemonCard key={pokemon.id} pokemon={pokemon}/>
           ))
         }
+        </Grid.Container>
       </ul>
     </LayoutApp>
   )
